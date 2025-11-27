@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import auth from './routes/auth.js';
 import analytics from './routes/analytics.js';
 import transaction from './routes/transactions.js';
+import users from './routes/users.js';
 import cors from 'cors';
 
 dotenv.config();
@@ -18,7 +19,7 @@ app.use(express.urlencoded({ extended: true }));
 // CORS configuration
 app.use(cors({
     origin: ['http://localhost:5173', 'http://localhost:3000'],
-    methods: ['GET', 'POST', 'PATCH', 'DELETE', 'OPTIONS'],
+    methods: ['GET', 'POST', 'PATCH', 'PUT' ,'DELETE', 'OPTIONS'],
     allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'Authorization'],
     credentials: true
 }));
@@ -32,6 +33,7 @@ app.use(helmet({
 app.use('/api/auth', auth);
 app.use('/api/analytics', analytics);
 app.use('/api/transactions', transaction);
+app.use('/api/users', users);
 
 
 app.get('/', (req, res) => {
