@@ -3,6 +3,7 @@ import helmet from 'helmet';
 import dotenv from 'dotenv';
 import auth from './routes/auth.js';
 import analytics from './routes/analytics.js';
+import transaction from './routes/transactions.js';
 import cors from 'cors';
 
 dotenv.config();
@@ -17,7 +18,7 @@ app.use(express.urlencoded({ extended: true }));
 // CORS configuration
 app.use(cors({
     origin: ['http://localhost:5173', 'http://localhost:3000'],
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    methods: ['GET', 'POST', 'PATCH', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'Authorization'],
     credentials: true
 }));
@@ -30,6 +31,8 @@ app.use(helmet({
 // Routes
 app.use('/api/auth', auth);
 app.use('/api/analytics', analytics);
+app.use('/api/transactions', transaction);
+
 
 app.get('/', (req, res) => {
     res.send('Personal Finance Tracker API');
