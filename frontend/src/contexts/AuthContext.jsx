@@ -2,7 +2,15 @@ import { createContext, useState, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import api from '../services/api';
 
-export const AuthContext = createContext(null);
+export const AuthContext = createContext({
+  user: null,
+  token: null,
+  loading: true,
+  login: async () => {},
+  logout: () => {},
+  register: async () => {},
+  isAuthenticated: false,
+});
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
@@ -50,12 +58,9 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   // Register function
-  const register = useCallback(async (email, username, password, role) => {
+  const register = useCallback(async (username, email, password) => {
     try {
-      const payload = { email, username, password };
-      if (role) {
-        payload.role = role;
-      }
+      const payload = { username, email, password };
 
       const response = await api.post('/auth/register', payload);
       const { user: userData, token: authToken } = response.data;
