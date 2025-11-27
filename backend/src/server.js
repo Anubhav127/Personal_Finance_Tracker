@@ -2,6 +2,7 @@ import express from 'express';
 import helmet from 'helmet';
 import dotenv from 'dotenv';
 import auth from './routes/auth.js';
+import analytics from './routes/analytics.js';
 import cors from 'cors';
 
 dotenv.config();
@@ -28,6 +29,7 @@ app.use(helmet({
 
 // Routes
 app.use('/api/auth', auth);
+app.use('/api/analytics', analytics);
 
 app.get('/', (req, res) => {
     res.send('Personal Finance Tracker API');
