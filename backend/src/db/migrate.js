@@ -85,4 +85,16 @@ const seedDatabase = async () => {
   }
 }
 
-export default { runMigration, seedDatabase };
+async function main() {
+  try {
+    //await runMigration();
+    await seedDatabase();
+    console.log('\n✓ Database setup completed successfully!');
+    process.exit(0);
+  } catch (error) {
+    console.error('\n✗ Database setup failed:', error);
+    process.exit(1);
+  }
+}
+
+main();

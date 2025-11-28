@@ -9,9 +9,7 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "lint": "eslint src/**/*.js",
-    "db:migrate": "node src/db/migrate.js",
-    "db:rollback": "node src/db/rollback.js",
-    "db:reset": "npm run db:rollback && npm run db:migrate"
+    "db:migrate": "node src/db/migrate.js"
   },
   "keywords": [],
   "author": "",

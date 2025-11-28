@@ -20,7 +20,7 @@ app.use(xss());
 
 // CORS configuration
 app.use(cors({
-    origin: ['http://localhost:5173', 'http://localhost:3000'],
+    origin: ['https://personal-finance-tracker-tawny-seven.vercel.app/'],
     methods: ['GET', 'POST', 'PATCH', 'PUT' ,'DELETE', 'OPTIONS'],
     allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'Authorization'],
     credentials: true
