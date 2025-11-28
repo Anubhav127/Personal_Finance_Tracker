@@ -7,7 +7,9 @@ import {getMonthlyAnalytics, getCategoryBreakdown, getIncomeExpenseTrends} from 
 
 const router = Router();
 
+// Apply rate limiter to all analytics routes
 router.use(authenticateToken);
+router.use(analyticslimiter);
 
 router.get('/monthly', getMonthlyAnalytics);
 

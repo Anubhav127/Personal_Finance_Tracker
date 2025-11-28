@@ -5,6 +5,7 @@ import auth from './routes/auth.js';
 import analytics from './routes/analytics.js';
 import transaction from './routes/transactions.js';
 import users from './routes/users.js';
+import { xss } from 'express-xss-sanitizer'
 import cors from 'cors';
 
 dotenv.config();
@@ -15,6 +16,7 @@ const port = process.env.PORT || 5000;
 // Middleware setup
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(xss());
 
 // CORS configuration
 app.use(cors({

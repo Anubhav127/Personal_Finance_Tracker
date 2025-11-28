@@ -9,6 +9,7 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js';
+import { useMemo } from 'react';
 
 // Register Chart.js components
 ChartJS.register(
@@ -22,7 +23,7 @@ ChartJS.register(
 
 function BarChart({ data }) {
   // Prepare chart data with different colors for income and expense bars
-  const chartData = () => {
+  const chartData = useMemo(() => {
     if (!data || data.length === 0) {
       return {
         labels: ['No Data'],
@@ -93,11 +94,10 @@ function BarChart({ data }) {
         },
       ],
     };
-  };
+  }, [data]);
 
   // Chart options with interactive tooltips
-  const options =
-    () => ({
+  const options = useMemo(() => ({
       responsive: true,
       maintainAspectRatio: false,
       interaction: {
@@ -155,7 +155,7 @@ function BarChart({ data }) {
           },
         },
       },
-    });
+    }), []);
 
   // Handle empty data gracefully
   if (!data || data.length === 0) {
@@ -168,7 +168,7 @@ function BarChart({ data }) {
           <p className="text-gray-500 text-sm">No comparison data available</p>
         </div>
         <div className="absolute inset-0 opacity-30">
-          <Bar data={chartData()} options={options()} />
+          <Bar data={chartData} options={options} />
         </div>
       </div>
     );
@@ -176,7 +176,7 @@ function BarChart({ data }) {
 
   return (
     <div className="relative w-full h-full p-4">
-      <Bar data={chartData()} options={options()} />
+      <Bar data={chartData} options={options} />
     </div>
   );
 }

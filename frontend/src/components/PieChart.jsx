@@ -6,13 +6,14 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js';
+import { useMemo } from 'react';
 
 // Register Chart.js components
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 function PieChart({ data }) {
   // Generate colors for categories
-    const colors = [
+    const colors = useMemo(() => [
       '#FF6384',
       '#36A2EB',
       '#FFCE56',
@@ -20,10 +21,10 @@ function PieChart({ data }) {
       '#9966FF',
       '#FF9F40',
       '#FF6384',
-    ];
+    ], []);
     
   // Prepare chart data
-  const chartData = () => {
+  const chartData = useMemo(() => {
     if (!data || data.length === 0) {
       return {
         labels: ['No Data'],
@@ -49,11 +50,10 @@ function PieChart({ data }) {
         },
       ],
     };
-  };
+  }, [data]);
 
   // Chart options with interactive tooltips
-  const options =
-    () => ({
+  const options = useMemo(() => ({
       responsive: true,
       maintainAspectRatio: false,
       plugins: {
@@ -88,7 +88,7 @@ function PieChart({ data }) {
           },
         },
       },
-    });
+    }), []);
 
   // Handle empty data gracefully
   if (!data || data.length === 0) {
@@ -101,7 +101,7 @@ function PieChart({ data }) {
           <p className="text-gray-500 text-sm">No expense data available</p>
         </div>
         <div className="absolute inset-0 opacity-30">
-          <Pie data={chartData()} options={options} />
+          <Pie data={chartData} options={options} />
         </div>
       </div>
     );
@@ -109,7 +109,7 @@ function PieChart({ data }) {
 
   return (
     <div className="relative w-full h-full p-4">
-      <Pie data={chartData()} options={options} />
+      <Pie data={chartData} options={options} />
     </div>
   );
 }

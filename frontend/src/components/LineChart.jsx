@@ -11,6 +11,7 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js';
+import { useMemo } from 'react';
 
 // Register Chart.js components
 ChartJS.register(
@@ -26,7 +27,7 @@ ChartJS.register(
 
 function LineChart({ data }) {
   // Prepare chart data with multiple lines for income and expense
-  const chartData = () => {
+  const chartData = useMemo(() => {
     if (!data || data.length === 0) {
       return {
         labels: ['No Data'],
@@ -84,11 +85,10 @@ function LineChart({ data }) {
         },
       ],
     };
-  };
+  }, [data]);
 
   // Chart options with interactive tooltips
-  const options =
-    () => ({
+  const options = useMemo(() => ({
       responsive: true,
       maintainAspectRatio: false,
       interaction: {
@@ -146,7 +146,7 @@ function LineChart({ data }) {
           },
         },
       },
-    });
+    }), []);
 
   // Handle empty data gracefully
   if (!data || data.length === 0) {
@@ -159,7 +159,7 @@ function LineChart({ data }) {
           <p className="text-gray-500 text-sm">No monthly data available</p>
         </div>
         <div className="absolute inset-0 opacity-30">
-          <Line data={chartData()} options={options} />
+          <Line data={chartData} options={options} />
         </div>
       </div>
     );
@@ -167,7 +167,7 @@ function LineChart({ data }) {
 
   return (
     <div className="relative w-full h-full p-4">
-      <Line data={chartData()} options={options} />
+      <Line data={chartData} options={options} />
     </div>
   );
 }

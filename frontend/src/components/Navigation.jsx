@@ -149,7 +149,7 @@ const Navigation = () => {
                     </div>
                     
                     <a
-                      href="/profile"
+                      href="#"
                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors duration-200"
                     >
                       <div className="flex items-center">
@@ -161,7 +161,7 @@ const Navigation = () => {
                     </a>
                     
                     <a
-                      href="/settings"
+                      href="#"
                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors duration-200"
                     >
                       <div className="flex items-center">
