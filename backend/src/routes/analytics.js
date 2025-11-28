@@ -8,6 +8,7 @@ import {getMonthlyAnalytics, getCategoryBreakdown, getIncomeExpenseTrends} from 
 const router = Router();
 
 router.use(authenticateToken);
+router.use(analyticslimiter);
 
 router.get('/monthly', getMonthlyAnalytics);
 
