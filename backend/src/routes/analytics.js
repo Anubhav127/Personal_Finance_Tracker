@@ -1,7 +1,9 @@
 import express from 'express';
 import { Router } from 'express';
 import {authenticateToken} from '../middleware/auth.js';
+import { analyticslimiter } from '../middleware/ratelimiter.js';
 import {getMonthlyAnalytics, getCategoryBreakdown, getIncomeExpenseTrends} from '../controllers/analyticsController.js';
+
 
 const router = Router();
 

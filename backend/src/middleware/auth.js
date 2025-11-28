@@ -9,13 +9,13 @@ const authenticateToken = (req, res, next) => {
         const token = authHeader && authHeader.split(' ')[1];
 
         if (!token) {
-            return res.status(401).json({ message: 'Unauthorized' });
+            return res.status(401).json({ message: 'Unauthorized Access' });
         }
 
         //verify token
         jwt.verify(token, process.env.JWT_SECRET, (error, user) => {
             if (error) {
-                return res.status(403).json({ message: 'Forbidden' });
+                return res.status(401).json({ message: 'Invalid Token' });
             }
             req.user = {
                 userId: user.userId,
@@ -26,7 +26,7 @@ const authenticateToken = (req, res, next) => {
 
     } catch (error) {
         console.error('Authentication error:', error);
-        return res.status(401).json({ message: 'Unauthorized' });
+        return res.status(401).json({ message: 'Unauthorized Access' });
     }
 }
 
